@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "hIJMFDis2x1NIp6zULJLl2qXfijxtg/RrijMiTyn3NWeQxsiVAUSuk0hP/2G3Dy0APb0s0Y1t5YboNqmlUqhHg==",
+  "success": true,
+  "projectFilePath": "D:\\Задания\\3 Курс\\ЭВМ\\Lab2\\Client\\Client\\Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\vital\\.nuget\\packages\\serilog\\3.0.1\\serilog.3.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
