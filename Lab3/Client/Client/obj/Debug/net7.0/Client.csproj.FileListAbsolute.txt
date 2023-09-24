@@ -1,0 +1,14 @@
+D:\Задания\3 Курс\ЭВМ\Client\Client\bin\Debug\net7.0\Client.exe
+D:\Задания\3 Курс\ЭВМ\Client\Client\bin\Debug\net7.0\Client.deps.json
+D:\Задания\3 Курс\ЭВМ\Client\Client\bin\Debug\net7.0\Client.runtimeconfig.json
+D:\Задания\3 Курс\ЭВМ\Client\Client\bin\Debug\net7.0\Client.dll
+D:\Задания\3 Курс\ЭВМ\Client\Client\bin\Debug\net7.0\Client.pdb
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\Client.AssemblyInfoInputs.cache
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\Client.AssemblyInfo.cs
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\Client.csproj.CoreCompileInputs.cache
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\Client.dll
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\refint\Client.dll
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\Client.pdb
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\Client.genruntimeconfig.cache
+D:\Задания\3 Курс\ЭВМ\Client\Client\obj\Debug\net7.0\ref\Client.dll

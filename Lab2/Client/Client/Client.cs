@@ -1,33 +1,45 @@
 ﻿using System;
-using System.IO;
 using System.IO.Pipes;
-using System.Threading;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NamedPipeClient
+class Client
 {
-    class Program
+    static async Task Main()
     {
-        static void Main(string[] args)
+        using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "MyPipeServer", PipeDirection.InOut))
         {
-            using (NamedPipeClientStream clientStream = new NamedPipeClientStream(".", "MyPipe", PipeDirection.In))
+            Console.WriteLine("Клиент пытается подключиться к серверу...");
+            await pipeClient.ConnectAsync();
+
+            try
             {
-                Console.WriteLine("Ожидание подключения к серверу...");
-                clientStream.Connect();
-
-                using (StreamReader reader = new StreamReader(clientStream))
+                while (true)
                 {
-                    Console.WriteLine("Соединение установлено. Ожидание данных...");
+                    Console.Write("Введите сообщение (или нажмите Ctrl+C для выхода): ");
+                    string input = await Console.In.ReadLineAsync(); // Асинхронный ввод
 
-                    while (true)
-                    {
-                        string receivedData = reader.ReadLine();
-                        if (receivedData != null)
-                        {
-                            Console.WriteLine($"Получено: {receivedData}");
-                            // Здесь можно сохранить данные в буфер или выполнять другие действия
-                        }
-                    }
+                    if (input == null) break; // Пользователь нажал Ctrl+C
+
+                    string message = $"({DateTime.Now.ToString("HH:mm:ss")}) {input}"; // Генерируем сообщение с текущим временем
+                    byte[] sendData = Encoding.UTF8.GetBytes(message);
+
+                    await pipeClient.WriteAsync(sendData, 0, sendData.Length);
+                    Console.WriteLine("Клиент отправил данные: {0}", message);
+
+                    byte[] receiveData = new byte[1024 * 10];
+                    int bytesRead = await pipeClient.ReadAsync(receiveData, 0, receiveData.Length);
+                    string receivedData = Encoding.UTF8.GetString(receiveData, 0, bytesRead);
+                    Console.WriteLine("Клиент получил ответ от сервера: {0}", receivedData);
                 }
+            }
+            catch (IOException)
+            {
+                // Исключение происходит при нажатии Ctrl+C, игнорируем его и закрываем канал
+            }
+            finally
+            {
+                pipeClient.Close();
             }
         }
     }

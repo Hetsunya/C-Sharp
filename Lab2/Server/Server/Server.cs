@@ -1,64 +1,138 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
+using System.Text;
 using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
-namespace NamedPipeServer
+class Server
 {
-    class Program
+    private static readonly Queue<string> dataQueue = new Queue<string>();
+    private static readonly object lockObject = new object();
+    private static bool isRunning = true;
+    private static readonly string logFilePath = "log.txt"; // Путь к файлу для сохранения данных
+
+    static async Task Main()
     {
-        private static Queue<string> dataQueue = new Queue<string>();
-        private static CancellationTokenSource cts = new CancellationTokenSource();
-
-        static void Main(string[] args)
+        Console.CancelKeyPress += async (sender, e) =>
         {
-            using (NamedPipeServerStream serverStream = new NamedPipeServerStream("MyPipe", PipeDirection.Out))
+            e.Cancel = true;
+            isRunning = false;
+
+            // Ожидаем завершения обработки данных из очереди
+            while (dataQueue.Count > 0)
             {
-                Console.WriteLine("Сервер запущен. Ожидание клиента...");
-                serverStream.WaitForConnection();
-
-                // Создаем поток для отправки данных на клиент
-                Thread sendThread = new Thread(() => SendData(serverStream));
-                sendThread.Start();
-
-                Console.WriteLine("Нажмите Ctrl+C для завершения.");
-                Console.CancelKeyPress += (s, e) =>
-                {
-                    cts.Cancel();
-                    sendThread.Join();
-                    serverStream.Close();
-                };
-
-                while (!cts.Token.IsCancellationRequested)
-                {
-                    Console.WriteLine("Введите данные для отправки:");
-                    string input = Console.ReadLine();
-                    dataQueue.Enqueue(input);
-                }
+                await Task.Delay(100);
             }
-        }
 
-        private static void SendData(NamedPipeServerStream serverStream)
+            // Выводим данные на экран или записываем их в файл
+            DisplayOrSaveData();
+        };
+
+        // Запускаем асинхронный поток для обработки данных из очереди
+        _ = ProcessDataAsync();
+
+        try
         {
-            using (StreamWriter writer = new StreamWriter(serverStream))
+            using (NamedPipeServerStream pipeServer = new NamedPipeServerStream("MyPipeServer", PipeDirection.InOut))
             {
-                while (!cts.Token.IsCancellationRequested)
+                Console.WriteLine("Сервер ожидает подключения...");
+                pipeServer.WaitForConnection();
+
+                byte[] receiveData = new byte[1024 * 10];
+                int bytesRead;
+                while (isRunning && (bytesRead = await pipeServer.ReadAsync(receiveData, 0, receiveData.Length)) > 0)
                 {
-                    if (dataQueue.Count > 0)
+                    string receivedData = System.Text.Encoding.UTF8.GetString(receiveData, 0, bytesRead);
+                    Console.WriteLine("Сервер получил данные: {0}", receivedData);
+
+                    // Добавляем полученные данные в очередь с учетом приоритета
+                    lock (lockObject)
                     {
-                        string dataToSend = dataQueue.Dequeue();
-                        writer.WriteLine(dataToSend);
-                        writer.Flush();
-                        Console.WriteLine($"Отправлено: {dataToSend}");
-                    }
-                    else
-                    {
-                        Thread.Sleep(100); // Ждем, если очередь пуста
+                        dataQueue.Enqueue(receivedData);
                     }
                 }
             }
         }
+        finally
+        {
+            // Закрыть канал при завершении
+        }
+    }
+
+    // Асинхронный метод для обработки данных из очереди
+    static async Task ProcessDataAsync()
+    {
+        while (isRunning)
+        {
+            string data = null;
+            lock (lockObject)
+            {
+                if (dataQueue.Count > 0)
+                {
+                    data = dataQueue.Dequeue();
+                }
+            }
+
+            if (data != null)
+            {
+                // Ваша логика обработки данных здесь
+
+                // Пример: Отправка ответа клиенту
+                await SendResponseToClient(data);
+
+                // Сохранение полученных данных в буфере
+                SaveDataToBuffer(data);
+            }
+
+            await Task.Delay(100); // Пауза между обработкой данными
+        }
+    }
+
+    // Пример: Отправка ответа клиенту
+    static async Task SendResponseToClient(string response)
+    {
+        byte[] sendData = System.Text.Encoding.UTF8.GetBytes(response);
+        using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "MyPipeClient", PipeDirection.InOut))
+        {
+            await pipeClient.ConnectAsync();
+            await pipeClient.WriteAsync(sendData, 0, sendData.Length);
+        }
+    }
+
+    // Сохранение данных в буфере
+    static void SaveDataToBuffer(string data)
+    {
+        // Просто добавляем полученные данные в очередь буфера
+        lock (lockObject)
+        {
+            dataQueue.Enqueue(data);
+        }
+    }
+
+    // Вывод данных на экран или запись их в файл
+    static void DisplayOrSaveData()
+    {
+        // В данном примере просто выводим данные на экран
+        Console.WriteLine("Вывод данных из буфера:");
+        while (dataQueue.Count > 0)
+        {
+            string data = null;
+            lock (lockObject)
+            {
+                if (dataQueue.Count > 0)
+                {
+                    data = dataQueue.Dequeue();
+                }
+            }
+            if (data != null)
+            {
+                Console.WriteLine(data);
+            }
+        }
+
+        // Если нужно записать данные в файл, используйте следующий код:
+        // File.WriteAllLines(logFilePath, dataQueue);
     }
 }

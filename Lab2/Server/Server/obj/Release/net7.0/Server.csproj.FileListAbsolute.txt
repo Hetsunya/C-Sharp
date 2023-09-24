@@ -49,3 +49,5 @@ D:\Задания\3 Курс\ЭВМ\Lab2\Server\Server\obj\Release\net7.0\refint
 D:\Задания\3 Курс\ЭВМ\Lab2\Server\Server\obj\Release\net7.0\Server.pdb
 D:\Задания\3 Курс\ЭВМ\Lab2\Server\Server\obj\Release\net7.0\Server.genruntimeconfig.cache
 D:\Задания\3 Курс\ЭВМ\Lab2\Server\Server\obj\Release\net7.0\ref\Server.dll
+D:\Задания\3 Курс\ЭВМ\Lab2\Server\Server\bin\Release\net7.0\MedallionPriorityQueue.dll
+D:\Задания\3 Курс\ЭВМ\Lab2\Server\Server\bin\Release\net7.0\ConcurrentPriorityQueue.dll

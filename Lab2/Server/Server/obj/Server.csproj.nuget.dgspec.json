@@ -45,6 +45,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "MedallionPriorityQueue": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "PriorityQueue": {
+              "target": "Package",
+              "version": "[0.1.0, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[3.0.1, )"
