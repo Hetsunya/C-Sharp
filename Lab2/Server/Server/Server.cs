@@ -1,138 +1,102 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.IO.Pipes;
-using System.Text;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Medallion.Collections;
+using MySharedLibrary;
 
 class Server
 {
-    private static readonly Queue<string> dataQueue = new Queue<string>();
-    private static readonly object lockObject = new object();
-    private static bool isRunning = true;
-    private static readonly string logFilePath = "log.txt"; // Путь к файлу для сохранения данных
+    static PriorityQueue<Structure> priorityQueue = new PriorityQueue<Structure>(Comparer<Structure>.Create((x, y) => x.num.CompareTo(y.num)));
+    static List<Structure> receivedDataBuffer = new List<Structure>();
+    static object bufferLock = new object();
 
     static async Task Main()
     {
-        Console.CancelKeyPress += async (sender, e) =>
+        using NamedPipeServerStream server = new NamedPipeServerStream("channel", PipeDirection.InOut);
+        var cancellationTokenSource = new CancellationTokenSource();
+
+        Console.CancelKeyPress += (s, e) =>
         {
             e.Cancel = true;
-            isRunning = false;
-
-            // Ожидаем завершения обработки данных из очереди
-            while (dataQueue.Count > 0)
-            {
-                await Task.Delay(100);
-            }
-
-            // Выводим данные на экран или записываем их в файл
-            DisplayOrSaveData();
+            cancellationTokenSource.Cancel();
         };
 
-        // Запускаем асинхронный поток для обработки данных из очереди
-        _ = ProcessDataAsync();
+        var processDataTask = Task.Run(() => ProcessData(cancellationTokenSource.Token));
+
+        server.WaitForConnection();
 
         try
         {
-            using (NamedPipeServerStream pipeServer = new NamedPipeServerStream("MyPipeServer", PipeDirection.InOut))
+            while (!cancellationTokenSource.Token.IsCancellationRequested)
             {
-                Console.WriteLine("Сервер ожидает подключения...");
-                pipeServer.WaitForConnection();
-
-                byte[] receiveData = new byte[1024 * 10];
-                int bytesRead;
-                while (isRunning && (bytesRead = await pipeServer.ReadAsync(receiveData, 0, receiveData.Length)) > 0)
+                Structure msg = new Structure
                 {
-                    string receivedData = System.Text.Encoding.UTF8.GetString(receiveData, 0, bytesRead);
-                    Console.WriteLine("Сервер получил данные: {0}", receivedData);
+                    num = 1,
+                    flag = false,
+                };
 
-                    // Добавляем полученные данные в очередь с учетом приоритета
-                    lock (lockObject)
-                    {
-                        dataQueue.Enqueue(receivedData);
-                    }
-                }
+                EnqueueData(msg);
+
+                byte[] bytes = new byte[Unsafe.SizeOf<Structure>()];
+                Unsafe.As<byte, Structure>(ref bytes[0]) = msg;
+                server.Write(bytes, 0, bytes.Length);
+
+                await Task.Delay(1000);
             }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
         finally
         {
-            // Закрыть канал при завершении
+            await processDataTask;
         }
     }
 
-    // Асинхронный метод для обработки данных из очереди
-    static async Task ProcessDataAsync()
+    static void EnqueueData(Structure data)
     {
-        while (isRunning)
+        priorityQueue.Enqueue(data);
+    }
+
+    static async Task ProcessData(CancellationToken cancellationToken)
+    {
+        while (!cancellationToken.IsCancellationRequested)
         {
-            string data = null;
-            lock (lockObject)
+            if (priorityQueue.Count > 0)
             {
-                if (dataQueue.Count > 0)
+                Structure data = priorityQueue.Dequeue();
+
+                lock (bufferLock)
                 {
-                    data = dataQueue.Dequeue();
+                    receivedDataBuffer.Add(data);
                 }
-            }
 
-            if (data != null)
+                Console.WriteLine($"Processing data: num = {data.num}, flag = {data.flag}");
+
+                // Здесь вы можете добавить дополнительную обработку данных, сохранение в файл, и т.д.
+                // ...
+
+                await Task.Delay(500);
+            }
+            else
             {
-                // Ваша логика обработки данных здесь
-
-                // Пример: Отправка ответа клиенту
-                await SendResponseToClient(data);
-
-                // Сохранение полученных данных в буфере
-                SaveDataToBuffer(data);
+                await Task.Delay(100);
             }
-
-            await Task.Delay(100); // Пауза между обработкой данными
         }
-    }
 
-    // Пример: Отправка ответа клиенту
-    static async Task SendResponseToClient(string response)
-    {
-        byte[] sendData = System.Text.Encoding.UTF8.GetBytes(response);
-        using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "MyPipeClient", PipeDirection.InOut))
+        // После завершения обработки данных, выведем их в консоль
+        lock (bufferLock)
         {
-            await pipeClient.ConnectAsync();
-            await pipeClient.WriteAsync(sendData, 0, sendData.Length);
-        }
-    }
-
-    // Сохранение данных в буфере
-    static void SaveDataToBuffer(string data)
-    {
-        // Просто добавляем полученные данные в очередь буфера
-        lock (lockObject)
-        {
-            dataQueue.Enqueue(data);
-        }
-    }
-
-    // Вывод данных на экран или запись их в файл
-    static void DisplayOrSaveData()
-    {
-        // В данном примере просто выводим данные на экран
-        Console.WriteLine("Вывод данных из буфера:");
-        while (dataQueue.Count > 0)
-        {
-            string data = null;
-            lock (lockObject)
+            Console.WriteLine("Received data buffer:");
+            foreach (var item in receivedDataBuffer)
             {
-                if (dataQueue.Count > 0)
-                {
-                    data = dataQueue.Dequeue();
-                }
-            }
-            if (data != null)
-            {
-                Console.WriteLine(data);
+                Console.WriteLine($"num = {item.num}, flag = {item.flag}");
             }
         }
-
-        // Если нужно записать данные в файл, используйте следующий код:
-        // File.WriteAllLines(logFilePath, dataQueue);
     }
 }
+

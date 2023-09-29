@@ -32,12 +32,16 @@ D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\refint
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\Client.pdb
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\Client.genruntimeconfig.cache
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\ref\Client.dll
+D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\bin\Release\net7.0\MySharedLibrary.dll
+D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\bin\Release\net7.0\MySharedLibrary.pdb
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\bin\Release\net7.0\Client.exe
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\bin\Release\net7.0\Client.deps.json
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\bin\Release\net7.0\Client.runtimeconfig.json
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\bin\Release\net7.0\Client.dll
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\bin\Release\net7.0\Client.pdb
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\bin\Release\net7.0\Serilog.dll
+D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\bin\Release\net7.0\MySharedLibrary.dll
+D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\bin\Release\net7.0\MySharedLibrary.pdb
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\obj\Release\net7.0\Client.csproj.AssemblyReference.cache
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\obj\Release\net7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
 D:\Задания\3 Курс\ЭВМ\Lab2\Client\Client\obj\Release\net7.0\Client.AssemblyInfoInputs.cache
