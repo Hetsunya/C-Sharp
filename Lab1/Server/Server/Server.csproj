@@ -11,4 +11,10 @@
     <PackageReference Include="Serilog" Version="3.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MySharedLibrary">
+      <HintPath>..\..\MySharedLibrary\bin\Release\net7.0\MySharedLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

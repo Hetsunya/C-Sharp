@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v7.0": {
       "Server/1.0.0": {
         "dependencies": {
-          "Serilog": "3.0.1"
+          "Serilog": "3.0.1",
+          "MySharedLibrary": "1.0.0.0"
         },
         "runtime": {
           "Server.dll": {}
@@ -19,6 +20,14 @@
           "lib/net7.0/Serilog.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "3.0.1.0"
+          }
+        }
+      },
+      "MySharedLibrary/1.0.0.0": {
+        "runtime": {
+          "MySharedLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -36,6 +45,11 @@
       "sha512": "sha512-E4UmOQ++eNJax1laE+lws7E3zbhKgHsGJbO7ra0yE5smUh+5FfUPIKKBxM3MO1tK4sgpQke6/pLReDxIc/ggNw==",
       "path": "serilog/3.0.1",
       "hashPath": "serilog.3.0.1.nupkg.sha512"
+    },
+    "MySharedLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -1,61 +1,31 @@
 ﻿using System.IO.Pipes;
+using System.Runtime.CompilerServices;
+using MySharedLibrary;
 
 class Server
 {
     static void Main()
     {
-        using (NamedPipeServerStream pipeServer = new NamedPipeServerStream("MyPipeServer", PipeDirection.InOut))
+        // Открытие канала
+        using NamedPipeServerStream Server = new("channel", PipeDirection.InOut);
+        Server.WaitForConnection();
+
+        // Создание сообщения
+        Structure msg = new()
         {
-            Console.WriteLine("Сервер ожидает подключения...");
-            pipeServer.WaitForConnection();
+            num = 1,
+            flag = false,
+        };
 
-            try
-            {
-                byte[] receiveData = new byte[1024 * 10];
-                int bytesRead = pipeServer.Read(receiveData, 0, receiveData.Length);
+        // Преобразование в байты
+        byte[] bytes = new byte[Unsafe.SizeOf<Structure>()];
+        Unsafe.As<byte, Structure>(ref bytes[0]) = msg;
+        Server.Write(bytes, 0, bytes.Length);
 
-                MyData receivedData = DeserializeData(receiveData, bytesRead);
-                Console.WriteLine("Сервер получил данные: {0}", receivedData);
-
-                MyData dataToSend = new MyData { Field1 = 123, Field2 = "Hello, клиент!" };
-                byte[] sendData = SerializeData(dataToSend);
-
-                pipeServer.Write(sendData, 0, sendData.Length);
-                Console.WriteLine("Сервер отправил ответ клиенту: {0}", dataToSend);
-            }
-            finally
-            {
-                pipeServer.Close();
-            }
-        }
-    }
-
-    public struct MyData
-    {
-        public int Field1;
-        public string Field2;
-    }
-
-    static byte[] SerializeData(MyData data)
-    {
-        using (MemoryStream stream = new MemoryStream())
-        using (BinaryWriter writer = new BinaryWriter(stream))
-        {
-            writer.Write(data.Field1);
-            writer.Write(data.Field2);
-            return stream.ToArray();
-        }
-    }
-
-    public static MyData DeserializeData(byte[] data, int bytesRead)
-    {
-        using (MemoryStream stream = new MemoryStream(data))
-        using (BinaryReader reader = new BinaryReader(stream))
-        {
-            MyData result;
-            result.Field1 = reader.ReadInt32();
-            result.Field2 = reader.ReadString();
-            return result;
-        }
+        // Получение измененных данных от клиента
+        byte[] received_bytes = new byte[Unsafe.SizeOf<Structure>()];
+        Server.Read(received_bytes, 0, received_bytes.Length);
+        Structure received_data = Unsafe.As<byte, Structure>(ref received_bytes[0]);
+        Console.WriteLine($"Received data: num = {received_data.num}, flag = {received_data.flag}");
     }
 }

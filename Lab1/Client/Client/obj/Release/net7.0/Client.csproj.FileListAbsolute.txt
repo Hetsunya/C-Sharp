@@ -32,3 +32,5 @@ D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\refint
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\Client.pdb
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\Client.genruntimeconfig.cache
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\ref\Client.dll
+D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\bin\Release\net7.0\MySharedLibrary.dll
+D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\bin\Release\net7.0\MySharedLibrary.pdb

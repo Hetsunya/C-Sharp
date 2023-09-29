@@ -1,0 +1,11 @@
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\bin\Release\net7.0\MySharedLibrary.deps.json
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\bin\Release\net7.0\MySharedLibrary.dll
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\bin\Release\net7.0\MySharedLibrary.pdb
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\obj\Release\net7.0\MySharedLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\obj\Release\net7.0\MySharedLibrary.AssemblyInfoInputs.cache
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\obj\Release\net7.0\MySharedLibrary.AssemblyInfo.cs
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\obj\Release\net7.0\MySharedLibrary.csproj.CoreCompileInputs.cache
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\obj\Release\net7.0\MySharedLibrary.dll
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\obj\Release\net7.0\refint\MySharedLibrary.dll
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\obj\Release\net7.0\MySharedLibrary.pdb
+D:\Задания\3 Курс\ЭВМ\Lab1\MySharedLibrary\obj\Release\net7.0\ref\MySharedLibrary.dll
