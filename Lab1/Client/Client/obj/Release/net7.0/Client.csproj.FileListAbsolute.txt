@@ -34,3 +34,22 @@ D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\Client
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\obj\Release\net7.0\ref\Client.dll
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\bin\Release\net7.0\MySharedLibrary.dll
 D:\Задания\3 Курс\ЭВМ\Lab1\Client\Client\bin\Release\net7.0\MySharedLibrary.pdb
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\bin\Release\net7.0\Client.exe
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\bin\Release\net7.0\Client.deps.json
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\bin\Release\net7.0\Client.runtimeconfig.json
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\bin\Release\net7.0\Client.dll
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\bin\Release\net7.0\Client.pdb
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\bin\Release\net7.0\Serilog.dll
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\bin\Release\net7.0\MySharedLibrary.dll
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\bin\Release\net7.0\MySharedLibrary.pdb
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.csproj.AssemblyReference.cache
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.AssemblyInfoInputs.cache
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.AssemblyInfo.cs
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.csproj.CopyComplete
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.dll
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\refint\Client.dll
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.pdb
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\Client.genruntimeconfig.cache
+C:\Users\Hetsu\Desktop\C-Sharp\Lab1\Client\Client\obj\Release\net7.0\ref\Client.dll

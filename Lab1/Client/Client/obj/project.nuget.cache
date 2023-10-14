@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FuPqixhzl29RyZ2f/2gGHYoIY6NlJMZrMv77120fdHMUMb6QvZN/pUQXYoAVCCj2OWwZqBbx92Dyh0I20N/e2A==",
+  "dgSpecHash": "As+7YrI+DyndZ03e6gdNS553wsDsr19cLpiFO85sa3J5qp93HVoYB6duvTN/cuJQRFkdnP0BdS7TlFPp51WZ2w==",
   "success": true,
-  "projectFilePath": "D:\\Задания\\3 Курс\\ЭВМ\\Lab1\\Client\\Client\\Client.csproj",
+  "projectFilePath": "C:\\Users\\Hetsu\\Desktop\\C-Sharp\\Lab1\\Client\\Client\\Client.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\vital\\.nuget\\packages\\serilog\\3.0.1\\serilog.3.0.1.nupkg.sha512"
+    "C:\\Users\\Hetsu\\.nuget\\packages\\serilog\\3.0.1\\serilog.3.0.1.nupkg.sha512"
   ],
   "logs": []
 }

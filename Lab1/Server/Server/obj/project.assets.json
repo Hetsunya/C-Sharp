@@ -52,23 +52,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vital\\.nuget\\packages\\": {},
+    "C:\\Users\\Hetsu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Задания\\3 Курс\\ЭВМ\\Lab1\\Server\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Hetsu\\Desktop\\C-Sharp\\Lab1\\Server\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "D:\\Задания\\3 Курс\\ЭВМ\\Lab1\\Server\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\vital\\.nuget\\packages\\",
-      "outputPath": "D:\\Задания\\3 Курс\\ЭВМ\\Lab1\\Server\\Server\\obj\\",
+      "projectPath": "C:\\Users\\Hetsu\\Desktop\\C-Sharp\\Lab1\\Server\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\Hetsu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Hetsu\\Desktop\\C-Sharp\\Lab1\\Server\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Hetsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -117,7 +117,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
